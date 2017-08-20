@@ -21,7 +21,6 @@ export default {
 
     content: {
         backgroundColor: '#fff',
-        paddingTop: 24,
         paddingLeft: 20,
         paddingRight: 20
     },

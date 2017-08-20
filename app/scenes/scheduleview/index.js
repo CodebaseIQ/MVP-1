@@ -24,6 +24,7 @@ import {
 } from 'native-base';
 import { NavigationActions } from 'react-navigation';
 import styles from './styles';
+import { StatusBar } from 'react-native';
 
 class ScheduleViewScreen extends Component{
     static navigationOptions = {
@@ -36,6 +37,7 @@ class ScheduleViewScreen extends Component{
     }
 
     render(){
+        StatusBar.setBarStyle('light-content');
         return (
             <Container style={styles.container}>
                 <Header style={styles.header}>

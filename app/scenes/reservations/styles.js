@@ -10,7 +10,8 @@ export default {
     header: {
         backgroundColor: 'transparent',
         paddingLeft: 0,
-        paddingRight: 0
+        paddingRight: 0,
+        borderBottomWidth: 0
     },
 
     headerTitle: {
@@ -89,5 +90,25 @@ export default {
 
     listItemRightIcon: {
         fontSize: 30
+    },
+
+    listItemLocationText: {
+        fontSize: 14,
+        fontFamily: 'SanFranciscoText-Regular',
+        color: 'rgb(155,155,168)',
+        marginTop: 8
+    },
+
+    listItemReceivedTimeText: {
+        fontSize: 14,
+        fontFamily: 'SanFranciscoText-Regular',
+        color: '#000',
+        marginTop: 8
+    },
+
+    listItemPriceText: {
+        fontSize: 14,
+        fontFamily: 'SanFranciscoText-Medium',
+        color: 'rgb(221,20,149)'
     }
 }

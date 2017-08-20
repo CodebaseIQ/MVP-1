@@ -23,6 +23,7 @@ import {
 } from 'native-base';
 import { NavigationActions } from 'react-navigation';
 import styles from './styles';
+import { StatusBar } from 'react-native';
 
 class ReservationScreen extends Component{
     static navigationOptions = {
@@ -47,6 +48,7 @@ class ReservationScreen extends Component{
     }
 
     render(){
+        StatusBar.setBarStyle('light-content');
         return (
             <Container style={styles.container}>
                 <Header style={styles.header}>
@@ -69,6 +71,7 @@ class ReservationScreen extends Component{
                     </Grid>
                 </View>
                 <Content style={styles.content}>
+                    {this.state.selectedTab == 0?
                     <List>
                         <ListItem style={styles.listItem} onPress={() => this.onDetail()}>
                             <Thumbnail square source={require('../../assets/home/1.png')} style={styles.listItemImage}/>
@@ -103,7 +106,46 @@ class ReservationScreen extends Component{
                                 <Icon style={styles.listItemRightIcon} name="arrow-forward"/>
                             </Right>
                         </ListItem>
+                    </List>:
+                    <List>
+                        <ListItem style={styles.listItem} onPress={() => this.onDetail()}>
+                            <Thumbnail square source={require('../../assets/home/1.png')} style={styles.listItemImage}/>
+                            <Body>
+                                <Text style={styles.listItemTitleText}>Bowling</Text>
+                                <Text style={styles.listItemLocationText}>Boronia St & Anzac Parade, NSW 2033</Text>
+                                <Text style={styles.listItemReceivedTimeText}>Received:   07/22/2017      7:00-8:00 pm</Text>
+                                <Text style={styles.listItemReceivedTimeText}>Total: <Text style={styles.listItemPriceText}> $40.00</Text></Text>
+                            </Body>
+                        </ListItem> 
+                        <ListItem style={styles.listItem} onPress={() => this.onDetail()}>
+                            <Thumbnail square source={require('../../assets/home/1.png')} style={styles.listItemImage}/>
+                            <Body>
+                                <Text style={styles.listItemTitleText}>Bowling</Text>
+                                <Text style={styles.listItemLocationText}>Boronia St & Anzac Parade, NSW 2033</Text>
+                                <Text style={styles.listItemReceivedTimeText}>Received:   07/22/2017      7:00-8:00 pm</Text>
+                                <Text style={styles.listItemReceivedTimeText}>Total: <Text style={styles.listItemPriceText}> $40.00</Text></Text>
+                            </Body>
+                        </ListItem>
+                        <ListItem style={styles.listItem} onPress={() => this.onDetail()}>
+                            <Thumbnail square source={require('../../assets/home/1.png')} style={styles.listItemImage}/>
+                            <Body>
+                                <Text style={styles.listItemTitleText}>Bowling</Text>
+                                <Text style={styles.listItemLocationText}>Boronia St & Anzac Parade, NSW 2033</Text>
+                                <Text style={styles.listItemReceivedTimeText}>Received:   07/22/2017      7:00-8:00 pm</Text>
+                                <Text style={styles.listItemReceivedTimeText}>Total: <Text style={styles.listItemPriceText}> $40.00</Text></Text>
+                            </Body>
+                        </ListItem>
+                        <ListItem style={styles.listItem} onPress={() => this.onDetail()}>
+                            <Thumbnail square source={require('../../assets/home/1.png')} style={styles.listItemImage}/>
+                            <Body>
+                                <Text style={styles.listItemTitleText}>Bowling</Text>
+                                <Text style={styles.listItemLocationText}>Boronia St & Anzac Parade, NSW 2033</Text>
+                                <Text style={styles.listItemReceivedTimeText}>Received:   07/22/2017      7:00-8:00 pm</Text>
+                                <Text style={styles.listItemReceivedTimeText}>Total: <Text style={styles.listItemPriceText}> $40.00</Text></Text>
+                            </Body>
+                        </ListItem>                       
                     </List>
+                    }
                 </Content>
             </Container>
         );

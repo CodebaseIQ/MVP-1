@@ -20,6 +20,7 @@ import {
 } from 'react-native';
 import { NavigationActions } from 'react-navigation';
 import styles from './styles';
+import { StatusBar } from 'react-native';
 
 class ForgotScreen extends Component{
     static navigationOptions = {
@@ -46,6 +47,7 @@ class ForgotScreen extends Component{
     }
 
     render(){
+        StatusBar.setBarStyle('light-content');
         return (
             <Container style={styles.container}>
                 <Header style={styles.header}>

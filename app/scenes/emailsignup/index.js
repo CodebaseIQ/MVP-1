@@ -25,6 +25,7 @@ import { NavigationActions } from 'react-navigation';
 import { Dimensions } from 'react-native';
 const { width, height } = Dimensions.get('window');
 import styles from './styles';
+import { StatusBar } from 'react-native';
 
 class EmailSignupScreen extends Component{
     static navigationOptions = {
@@ -37,7 +38,10 @@ class EmailSignupScreen extends Component{
         this.state = {
             progress: 1,
             step: 0,
-            hidePass: true
+            hidePass: true,
+            gender: true,
+            marital: false,
+            kids: false
         }
     }
 
@@ -77,7 +81,26 @@ class EmailSignupScreen extends Component{
         });
     }
 
+    toggleGender(gender){
+        this.setState({
+            gender: gender
+        });
+    }
+
+    toggleMarital(marital){
+        this.setState({
+           marital: marital 
+        });
+    }
+
+    toggleKids(kids){
+        this.setState({
+            kids: kids
+        });
+    }
+
     render(){
+        StatusBar.setBarStyle('light-content');
         return (
             <Container style={styles.container}>
                 <Header style={styles.header}>
@@ -125,13 +148,19 @@ class EmailSignupScreen extends Component{
                                         <Text style={styles.listFormItemText}>GENDER</Text>
                                     </Body>
                                     <Right>
-                                        <Button transparent style={styles.rightBtn} onPress={() => alert("Clicked")}>
-                                            <Thumbnail square source={require('../../assets/marriedSelected.png')} style={styles.manIcon}/>
+                                        <Button transparent style={styles.rightBtn} onPress={() => this.toggleGender(true)}>
+                                            {this.state.gender?
+                                            <Thumbnail square source={require('../../assets/profile/femaleSelected.png')} style={styles.manIcon}/>:
+                                            <Thumbnail square source={require('../../assets/profile/femaleNormal.png')} style={styles.manIcon}/>
+                                            }
                                         </Button>
                                     </Right>
                                     <Right>
-                                        <Button transparent style={styles.rightBtn} onPress={() => alert("Clicked")}>
-                                            <Thumbnail square source={require('../../assets/single_2.png')} style={styles.manIcon}/>
+                                        <Button transparent style={styles.rightBtn} onPress={() => this.toggleGender(false)}>
+                                            {this.state.gender?
+                                            <Thumbnail square source={require('../../assets/profile/maleNormal.png')} style={styles.manIcon}/>:
+                                            <Thumbnail square source={require('../../assets/profile/maleSelected.png')} style={styles.manIcon}/>
+                                            }
                                         </Button>
                                     </Right>
                                 </ListItem>
@@ -140,13 +169,19 @@ class EmailSignupScreen extends Component{
                                         <Text style={styles.listFormItemText}>MARITAL STATUS</Text>
                                     </Body>
                                     <Right>
-                                        <Button transparent style={styles.rightBtn} onPress={() => alert("Clicked")}>
-                                            <Thumbnail square source={require('../../assets/marriedSelected.png')} style={styles.manIcon}/>
+                                        <Button transparent style={styles.rightBtn} onPress={() => this.toggleMarital(true)}>
+                                            {this.state.marital?
+                                            <Thumbnail square source={require('../../assets/profile/marriedSelected.png')} style={styles.manIcon}/>:
+                                            <Thumbnail square source={require('../../assets/profile/marriedNormal.png')} style={styles.manIcon}/>
+                                            }
                                         </Button>
                                     </Right>
                                     <Right>
-                                        <Button transparent style={styles.rightBtn} onPress={() => alert("Clicked")}>
-                                            <Thumbnail square source={require('../../assets/single_2.png')} style={styles.manIcon}/>
+                                        <Button transparent style={styles.rightBtn} onPress={() => this.toggleMarital(false)}>
+                                            {this.state.marital?
+                                            <Thumbnail square source={require('../../assets/profile/maleNormal.png')} style={styles.manIcon}/>:
+                                            <Thumbnail square source={require('../../assets/profile/maleSelected.png')} style={styles.manIcon}/>
+                                            }
                                         </Button>
                                     </Right>
                                 </ListItem>
@@ -155,13 +190,19 @@ class EmailSignupScreen extends Component{
                                         <Text style={styles.listFormItemText}>DO YOU HAVE KIDS?</Text>
                                     </Body>
                                     <Right>
-                                        <Button transparent style={styles.rightBtn} onPress={() => alert("Clicked")}>
-                                            <Thumbnail square source={require('../../assets/yesNormal.png')} style={styles.manIcon}/>
+                                        <Button transparent style={styles.rightBtn} onPress={() => this.toggleKids(true)}>
+                                            {this.state.kids?
+                                            <Thumbnail square source={require('../../assets/profile/yesSelected.png')} style={styles.manIcon}/>:
+                                            <Thumbnail square source={require('../../assets/profile/yesNormal.png')} style={styles.manIcon}/>
+                                            }
                                         </Button>
                                     </Right>
                                     <Right>
-                                        <Button transparent style={styles.rightBtn} onPress={() => alert("Clicked")}>
-                                            <Thumbnail square source={require('../../assets/noSelected.png')} style={styles.manIcon}/>
+                                        <Button transparent style={styles.rightBtn} onPress={() => this.toggleKids(false)}>
+                                            {this.state.kids?
+                                            <Thumbnail square source={require('../../assets/profile/noNormal.png')} style={styles.manIcon}/>:
+                                            <Thumbnail square source={require('../../assets/profile/noSelected.png')} style={styles.manIcon}/>
+                                            }
                                         </Button>
                                     </Right>
                                 </ListItem>

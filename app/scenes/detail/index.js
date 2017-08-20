@@ -24,6 +24,7 @@ import {
 import { NavigationActions } from 'react-navigation';
 import MapView from 'react-native-maps';
 import styles from './styles';
+import { StatusBar } from 'react-native';
 
 class DetailScreen extends Component{
     static navigationOptions = {
@@ -65,6 +66,7 @@ class DetailScreen extends Component{
     }
 
     render(){
+        StatusBar.setBarStyle('light-content');
         return (
             <Container style={styles.container}>
                 <Button style={styles.saveBtn} onPress={() => this.onSave()}>

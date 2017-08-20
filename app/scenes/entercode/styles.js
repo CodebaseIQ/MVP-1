@@ -54,8 +54,6 @@ export default {
         height: 48,
         width: 40,
         backgroundColor: 'rgb(11,20,72)',
-        marginLeft: 7,
-        marginRight: 7,
         color: '#fff',
         fontSize: 28,
         textAlign: 'center'

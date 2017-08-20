@@ -18,6 +18,7 @@ import {
 } from 'native-base';
 import { NavigationActions } from 'react-navigation';
 import styles from './styles';
+import { StatusBar } from 'react-native';
 
 class EmailLoginScreen extends Component{
     static navigationOptions = {
@@ -45,6 +46,7 @@ class EmailLoginScreen extends Component{
     }
 
     render(){
+        StatusBar.setBarStyle('light-content');
         return (
             <Container style={styles.container}>
                 <Header style={styles.header}>

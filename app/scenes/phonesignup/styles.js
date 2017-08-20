@@ -68,7 +68,8 @@ export default {
         marginBottom: 16,
         borderBottomWidth: 1,
         borderBottomColor: 'rgba(255,255,255,0.5)',
-        position: 'relative'
+        position: 'relative',
+        alignItems: 'flex-start'
     },
 
     formLabel: {
@@ -131,8 +132,7 @@ export default {
         width: 40,
         height: 48,
         backgroundColor: 'rgb(11,20,72)',
-        marginLeft: 7,
-        marginRight: 7,
+        
         textAlign: 'center',
         fontSize: 28,
         color: '#fff',

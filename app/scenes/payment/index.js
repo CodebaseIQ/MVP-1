@@ -25,6 +25,7 @@ import {
 } from 'native-base';
 import { NavigationActions } from 'react-navigation';
 import styles from './styles';
+import { StatusBar } from 'react-native';
 
 class PaymentScreen extends Component{
     static navigationOptions = {
@@ -74,6 +75,7 @@ class PaymentScreen extends Component{
     }
 
     render(){
+        StatusBar.setBarStyle('dark-content');
         return (
             <Container style={styles.container}>
                 <Header style={styles.header}>

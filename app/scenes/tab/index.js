@@ -14,6 +14,7 @@ import {
 } from 'native-base';
 import { NavigationActions } from 'react-navigation';
 import styles from './styles';
+import { StatusBar } from 'react-native';
 
 import HomeScreen from '../home/';
 import SavedScreen from '../saved/';
@@ -41,6 +42,7 @@ class TabScreen extends Component{
     }
 
     render(){
+        StatusBar.setBarStyle('light-content');
         return (
             <Container style={styles.container}>
                 {this.state.selectedTab == 0?

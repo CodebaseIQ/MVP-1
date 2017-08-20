@@ -22,9 +22,11 @@ import {
     ListItem
 } from 'native-base';
 import { NavigationActions } from 'react-navigation';
-import { Dimensions, DatePickerIOS } from 'react-native';
+import { Dimensions, DatePickerIOS, TextInput } from 'react-native';
 const { width, height } = Dimensions.get('window');
 import styles from './styles';
+import { StatusBar } from 'react-native';
+import  PDatePicker from '../datepicker/';
 
 class PhoneSignupScreen extends Component{
     static navigationOptions = {
@@ -39,7 +41,16 @@ class PhoneSignupScreen extends Component{
             step: 0,
             hidePass: true,
             date: new Date(),
-            showDatePicker: false
+            showDatePicker: false,
+            gender: true,
+            marital: false,
+            kids: false,
+            num1: "",
+            num2: "",
+            num3: "",
+            num4: "",
+            num5: "",
+            num6: ""
         };
     }
 
@@ -83,19 +94,89 @@ class PhoneSignupScreen extends Component{
         });
     }
 
-    onFocus(){
+    onCancel(){
+        this.setState({
+            showDatePicker: false
+        });
+    }
+    
+    onDone(date){
+        this.setState({
+            date: new Date(date),
+            showDatePicker: false
+        });
+    }
+
+    onDatePicker(){
         this.setState({
             showDatePicker: true
         });
     }
 
-    onBlur(){
+    toggleGender(gender){
         this.setState({
-            showDatePicker: false
+            gender: gender
         });
     }
 
+    toggleMarital(marital){
+        this.setState({
+            marital: marital
+        })
+    }
+
+    toggleKids(kids){
+        this.setState({
+            kids: kids
+        });
+    }
+
+    onChangeText(text, index){
+        switch(index){
+            case 1:
+                this.setState({
+                    num1: text
+                });
+                this.refs[2].focus();
+                break;
+            case 2:
+                this.setState({
+                    num2: text
+                });
+                this.refs[3].focus();
+                break;
+            case 3:
+                this.setState({
+                    num3: text
+                });
+                this.refs[4].focus();
+                break;
+            case 4:
+                this.setState({
+                    num4: text
+                });
+                this.refs[5].focus();
+                break;
+            case 5:
+                this.setState({
+                    num5: text
+                });
+                this.refs[6].focus();
+                break;
+            case 6:
+                this.setState({
+                    num6: text
+                });
+                break;
+        }
+    }
+
+    showDateFormat(){
+        return this.state.date.getFullYear() + "-" + (this.state.date.getMonth() < 9? ("0" + (this.state.date.getMonth() + 1)):(this.state.date.getMonth()+ 1)) + "-" + (this.state.date.getDate() < 9? ("0" + (this.state.date.getDate())): (this.state.date.getDate()));
+    }
+
     render(){
+        StatusBar.setBarStyle('light-content');
         return (
             <Container style={styles.container}>
                 <Header style={styles.header}>
@@ -136,12 +217,12 @@ class PhoneSignupScreen extends Component{
                         <Text style={styles.signupTitle}>Sign Up</Text>
                         <Text style={styles.descText}>Enter your code.</Text>
                         <View style={styles.codeContainer}>
-                            <Input style={styles.codeItem} keyboardType="numeric" maxLength={1}/>
-                            <Input style={styles.codeItem} keyboardType="numeric" maxLength={1}/>
-                            <Input style={styles.codeItem} keyboardType="numeric" maxLength={1}/>
-                            <Input style={styles.codeItem} keyboardType="numeric" maxLength={1}/>
-                            <Input style={styles.codeItem} keyboardType="numeric" maxLength={1}/>
-                            <Input style={styles.codeItem} keyboardType="numeric" maxLength={1}/>                            
+                            <TextInput ref="1" style={styles.codeItem} keyboardType="numeric" maxLength={1} onChangeText={(text) => this.onChangeText(text, 1)}/>
+                            <TextInput ref="2" style={styles.codeItem} keyboardType="numeric" maxLength={1} onChangeText={(text) => this.onChangeText(text, 2)}/>
+                            <TextInput ref="3" style={styles.codeItem} keyboardType="numeric" maxLength={1} onChangeText={(text) => this.onChangeText(text, 3)}/>
+                            <TextInput ref="4" style={styles.codeItem} keyboardType="numeric" maxLength={1} onChangeText={(text) => this.onChangeText(text, 4)}/>
+                            <TextInput ref="5" style={styles.codeItem} keyboardType="numeric" maxLength={1} onChangeText={(text) => this.onChangeText(text, 5)}/>
+                            <TextInput ref="6" style={styles.codeItem} keyboardType="numeric" maxLength={1} onChangeText={(text) => this.onChangeText(text, 6)}/>                            
                         </View>                        
                         <Text style={styles.sendBtnText}>Send New Code</Text>
                         <Text style={styles.sendDescText}>
@@ -164,13 +245,13 @@ class PhoneSignupScreen extends Component{
                                 <Col style={styles.birthdayInputContainer}>
                                     <Item stackedLabel style={styles.formItem}>
                                         <Label style={styles.formLabel}>BIRTHDAY</Label>
-                                        <Input style={[styles.formInput,{ width: width / 2 - 28}]} onPress={() => this.onFocus()} onBlur={() => this.onBlur()}/>
+                                        <Text  onPress={() => this.onDatePicker()} style={[styles.formInput,{ width: width/2 -41, lineHeight: 48}]}>{this.showDateFormat()}</Text>
                                     </Item>
                                 </Col>
                                 <Col style={styles.zipcodeInputContainer}>
                                     <Item stackedLabel style={styles.formItem}>
                                         <Label style={styles.formLabel}>ZIP CODE</Label>
-                                        <Input style={styles.formInput}/>
+                                        <Input style={styles.formInput} keyboardType="numeric"/>
                                     </Item>
                                 </Col>
                             </Grid>
@@ -180,13 +261,19 @@ class PhoneSignupScreen extends Component{
                                         <Text style={styles.listFormItemText}>GENDER</Text>
                                     </Body>
                                     <Right>
-                                        <Button transparent style={styles.rightBtn} onPress={() => alert("Clicked")}>
-                                            <Thumbnail square source={require('../../assets/marriedSelected.png')} style={styles.manIcon}/>
+                                        <Button transparent style={styles.rightBtn} onPress={() => this.toggleGender(true)}>
+                                            {this.state.gender?
+                                            <Thumbnail square source={require('../../assets/profile/femaleSelected.png')} style={styles.manIcon}/>:
+                                            <Thumbnail square source={require('../../assets/profile/femaleNormal.png')} style={styles.manIcon}/>
+                                            }
                                         </Button>
                                     </Right>
                                     <Right>
-                                        <Button transparent style={styles.rightBtn} onPress={() => alert("Clicked")}>
-                                            <Thumbnail square source={require('../../assets/single_2.png')} style={styles.manIcon}/>
+                                        <Button transparent style={styles.rightBtn} onPress={() => this.toggleGender(false)}>
+                                            {this.state.gender?
+                                            <Thumbnail square source={require('../../assets/profile/maleNormal.png')} style={styles.manIcon}/>:
+                                            <Thumbnail square source={require('../../assets/profile/maleSelected.png')} style={styles.manIcon}/>
+                                            }
                                         </Button>
                                     </Right>
                                 </ListItem>
@@ -195,13 +282,19 @@ class PhoneSignupScreen extends Component{
                                         <Text style={styles.listFormItemText}>MARITAL STATUS</Text>
                                     </Body>
                                     <Right>
-                                        <Button transparent style={styles.rightBtn} onPress={() => alert("Clicked")}>
-                                            <Thumbnail square source={require('../../assets/marriedSelected.png')} style={styles.manIcon}/>
+                                        <Button transparent style={styles.rightBtn} onPress={() => this.toggleMarital(true)}>
+                                            {this.state.marital?
+                                            <Thumbnail square source={require('../../assets/profile/marriedSelected.png')} style={styles.manIcon}/>:
+                                            <Thumbnail square source={require('../../assets/profile/marriedNormal.png')} style={styles.manIcon}/>
+                                            }
                                         </Button>
                                     </Right>
                                     <Right>
-                                        <Button transparent style={styles.rightBtn} onPress={() => alert("Clicked")}>
-                                            <Thumbnail square source={require('../../assets/single_2.png')} style={styles.manIcon}/>
+                                        <Button transparent style={styles.rightBtn} onPress={() => this.toggleMarital(false)}>
+                                            {this.state.marital?
+                                            <Thumbnail square source={require('../../assets/profile/maleNormal.png')} style={styles.manIcon}/>:
+                                            <Thumbnail square source={require('../../assets/profile/maleSelected.png')} style={styles.manIcon}/>
+                                            }
                                         </Button>
                                     </Right>
                                 </ListItem>
@@ -210,13 +303,19 @@ class PhoneSignupScreen extends Component{
                                         <Text style={styles.listFormItemText}>DO YOU HAVE KIDS?</Text>
                                     </Body>
                                     <Right>
-                                        <Button transparent style={styles.rightBtn} onPress={() => alert("Clicked")}>
-                                            <Thumbnail square source={require('../../assets/yesNormal.png')} style={styles.manIcon}/>
+                                        <Button transparent style={styles.rightBtn} onPress={() => this.toggleKids(true)}>
+                                            {this.state.kids?
+                                            <Thumbnail square source={require('../../assets/profile/yesSelected.png')} style={styles.manIcon}/>:
+                                            <Thumbnail square source={require('../../assets/profile/yesNormal.png')} style={styles.manIcon}/>
+                                            }
                                         </Button>
                                     </Right>
                                     <Right>
-                                        <Button transparent style={styles.rightBtn} onPress={() => alert("Clicked")}>
-                                            <Thumbnail square source={require('../../assets/noSelected.png')} style={styles.manIcon}/>
+                                        <Button transparent style={styles.rightBtn} onPress={() => this.toggleKids(false)}>
+                                            {this.state.kids?
+                                            <Thumbnail square source={require('../../assets/profile/noNormal.png')} style={styles.manIcon}/>:
+                                            <Thumbnail square source={require('../../assets/profile/noSelected.png')} style={styles.manIcon}/>
+                                            }
                                         </Button>
                                     </Right>
                                 </ListItem>
@@ -242,14 +341,11 @@ class PhoneSignupScreen extends Component{
                         <Button block style={styles.nextBtn} onPress={() => this.onNext(1,1)}>
                             <Text style={styles.nextBtnText}>Sign Up</Text>
                         </Button>
-                    </View>: null}
-                </Content>
+                    </View>: null}                    
+                </Content>   
                 {this.state.showDatePicker?
-                <DatePickerIOS
-                    date={this.state.date}
-                    mode="date"
-                    style={{backgroundColor: 'rgba(255,255,255,0.7)'}}
-                />: null}
+                <PDatePicker date={this.state.date}  onCancel={() => this.onCancel()} onDone={(date) => this.onDone(date)}/> : null
+                }           
             </Container>
         );
     }

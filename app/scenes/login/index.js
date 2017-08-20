@@ -14,6 +14,7 @@ import {
 } from 'native-base';
 import { NavigationActions } from 'react-navigation';
 import styles from './styles';
+import { StatusBar } from 'react-native';
 
 class LoginScreen extends Component{
     static navigationOptions = {
@@ -53,6 +54,7 @@ class LoginScreen extends Component{
     }
 
     render(){
+        StatusBar.setBarStyle('light-content');
         return (
             <Container style={styles.container}>
                 <Thumbnail square source={this.props.navigation.state.params.type == 'login'?require('../../assets/bgLogin.png'): require('../../assets/bgSignup.png')} style={styles.background}>

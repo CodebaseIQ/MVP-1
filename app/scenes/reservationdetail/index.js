@@ -24,6 +24,7 @@ import {
 import { NavigationActions } from 'react-navigation';
 import QRCode from 'react-native-qrcode';
 import styles from './styles';
+import { StatusBar } from 'react-native';
 
 class ReservationDetailScreen extends Component{
     static navigationOptions = {
@@ -36,6 +37,7 @@ class ReservationDetailScreen extends Component{
     }
 
     render(){
+        StatusBar.setBarStyle('light-content');
         return (
             <Container style={styles.container}>
                 <Thumbnail square source={require('../../assets/home/1.png')} style={styles.image}/>

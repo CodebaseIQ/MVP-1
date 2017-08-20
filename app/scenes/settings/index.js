@@ -24,13 +24,29 @@ import {
 } from 'native-base';
 import { NavigationActions } from 'react-navigation';
 import styles from './styles';
+import { StatusBar } from 'react-native';
 
 class SettingScreen extends Component{
     static navigationOptions = {
         header: null
     };
 
+    constructor(props){
+        super(props);
+
+        this.state = {
+            notification: false
+        };
+    }
+
+    onValueChange(value){
+        this.setState({
+            notification: value
+        })
+    }
+
     render(){
+        StatusBar.setBarStyle('light-content');
         return (
             <Container style={styles.container}>
                 <Header style={styles.header}>
@@ -45,7 +61,7 @@ class SettingScreen extends Component{
                                 <Text>Notifications</Text>
                             </Body>
                             <Right>
-                                <Switch value={true}/>
+                                <Switch value={this.state.notification} onValueChange={(value) => this.onValueChange(value)}/>
                             </Right>
                         </ListItem>
                         <ListItem style={styles.listItem}>
@@ -53,7 +69,7 @@ class SettingScreen extends Component{
                                 <Text>Currency</Text>
                             </Body>
                             <Right>
-                                <Text style={styles.currencyText}>USD ($)</Text>
+                                <Text style={styles.currencyText}>USD($)</Text>
                             </Right>
                         </ListItem>
                         <ListItem style={styles.listItem}>

@@ -15,6 +15,7 @@ import {
  } from 'native-base';
 import { NavigationActions } from 'react-navigation';
 import styles from './styles';
+import { StatusBar } from 'react-native';
 
 class ShareScreen extends Component{
     static navigationOptions = {
@@ -27,6 +28,7 @@ class ShareScreen extends Component{
     }
 
     render(){
+        StatusBar.setBarStyle('dark-content');
         return (
             <Container style={styles.container}>
                 <Header style={styles.header}>
